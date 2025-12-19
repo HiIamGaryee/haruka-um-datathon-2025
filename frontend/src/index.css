@@ -1,0 +1,146 @@
+@import url("https://rsms.me/inter/inter.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ======================================================
+   BASE
+   ====================================================== */
+html {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ======================================================
+   AZ THEME — LIGHT
+   ====================================================== */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 215 30% 15%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 215 30% 15%;
+
+  --primary: 332 100% 26%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 201 74% 64%;
+  --secondary-foreground: 215 30% 15%;
+
+  --accent: 67 65% 55%;
+  --accent-foreground: 215 30% 15%;
+
+  --muted: 210 20% 96%;
+  --muted-foreground: 215 15% 40%;
+  --border: 215 15% 85%;
+  --input: 215 15% 85%;
+
+  --success: 67 65% 55%;
+  --danger: 332 100% 41%;
+  --destructive: 332 100% 41%;
+  --destructive-foreground: 0 0% 100%;
+
+  --az-navy: 215 30% 15%;
+  --az-lime: 67 65% 55%;
+  --az-gold: 45 65% 55%;
+
+  --radius: 0.75rem;
+  --ring: 332 100% 26%;
+  --ring-offset: 0 0% 100%;
+}
+
+/* ======================================================
+   DARK MODE
+   ====================================================== */
+.dark {
+  --background: 215 30% 8%;
+  --foreground: 0 0% 98%;
+
+  --card: 215 30% 12%;
+  --card-foreground: 0 0% 98%;
+
+  --primary: 332 100% 45%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 201 74% 55%;
+  --secondary-foreground: 215 30% 10%;
+
+  --accent: 67 65% 55%;
+  --accent-foreground: 215 30% 10%;
+
+  --muted: 215 25% 18%;
+  --muted-foreground: 215 15% 65%;
+  --border: 215 20% 22%;
+  --input: 215 20% 22%;
+
+  --success: 67 65% 55%;
+  --danger: 332 100% 55%;
+  --destructive: 332 100% 55%;
+  --destructive-foreground: 0 0% 100%;
+
+  --az-navy: 215 30% 85%;
+  --az-lime: 67 65% 55%;
+  --az-gold: 45 65% 55%;
+
+  --ring: 332 100% 45%;
+  --ring-offset: 215 30% 8%;
+}
+
+/* ======================================================
+   COMPONENT HELPERS (NO @apply)
+   ====================================================== */
+.kpi-card {
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.kpi-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.dark .kpi-card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.dark .kpi-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+.section-title {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: hsl(var(--muted-foreground));
+}
+
+.text-positive {
+  color: hsl(var(--success));
+}
+
+.text-negative {
+  color: hsl(var(--danger));
+}
+
+.chart-card {
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.dark .chart-card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}

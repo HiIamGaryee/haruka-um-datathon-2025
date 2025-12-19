@@ -1,0 +1,14 @@
+{
+  "starting_cash_usd":9654990.2902480643,
+  "model":"Rolling Mean Baseline",
+  "mae":"insufficient_history",
+  "assumptions":[
+    "Transaction amounts unavailable; directional proxy used",
+    "Recent weeks represent near-term liquidity behaviour",
+    "Forecast focuses on liquidity direction not magnitude"
+  ],
+  "limitations":[
+    "Short historical window limits backtesting",
+    "Forecast is indicative not predictive of shocks"
+  ]
+}
