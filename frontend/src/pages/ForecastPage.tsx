@@ -128,7 +128,7 @@ export default function ForecastPage() {
             <h3 className="mb-4 text-sm font-semibold text-secondary uppercase tracking-wider">
               1-Month Outlook
             </h3>
-            <div className="h-[200px] w-full">
+            <div className="h-50 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={bundle.forecasts["1_month"]}>
                   <defs>
@@ -174,7 +174,7 @@ export default function ForecastPage() {
             <h3 className="mb-4 text-sm font-semibold text-secondary uppercase tracking-wider">
               3-Month Outlook
             </h3>
-            <div className="h-[200px] w-full">
+            <div className="h-50 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={bundle.forecasts["3_months"]}>
                   <defs>
@@ -212,7 +212,7 @@ export default function ForecastPage() {
             <h3 className="mb-4 text-sm font-semibold text-secondary uppercase tracking-wider">
               1-Year Outlook
             </h3>
-            <div className="h-[200px] w-full">
+            <div className="h-50 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={bundle.forecasts["1_year"]}>
                   <defs>
