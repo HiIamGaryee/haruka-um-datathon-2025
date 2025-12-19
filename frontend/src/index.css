@@ -1,149 +1,86 @@
 @import "tailwindcss";
 @import url("https://rsms.me/inter/inter.css");
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
 
-/* ======================================================
-   BASE
-   ====================================================== */
+  /* Define Animation Keyframes here */
+  @keyframes icon-spin {
+    0% {
+      transform: rotate(-90deg) scale(0);
+      opacity: 0;
+    }
+    100% {
+      transform: rotate(0deg) scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+/* Base Variables (Light Mode - AZ Standard) */
+:root {
+  --background: 0 0% 100%; /* White */
+  --foreground: 180 4% 26%; /* Graphite */
+  --card: 0 0% 100%;
+  --card-foreground: 180 4% 26%;
+  --primary: 323 100% 26%; /* Mulberry */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 207 100% 20%; /* Navy */
+  --secondary-foreground: 0 0% 100%;
+  --accent: 65 100% 42%; /* Lime */
+  --accent-foreground: 207 100% 20%;
+  --muted: 210 20% 96%;
+  --muted-foreground: 180 2% 45%;
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 323 100% 26%;
+  --radius: 0.5rem;
+}
+
+/* DARK MODE OVERRIDES (AZ Dark Palette) */
+.dark {
+  --background: 207 100% 10%; /* Deep Navy Background */
+  --foreground: 0 0% 98%; /* White Text */
+  --card: 207 50% 15%; /* Lighter Navy for Cards */
+  --card-foreground: 0 0% 98%;
+  --primary: 323 80% 60%; /* Brighter Mulberry for Dark Mode */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 207 30% 30%; /* Muted Navy */
+  --secondary-foreground: 0 0% 100%;
+  --accent: 65 100% 42%; /* Keep Lime (It pops well) */
+  --accent-foreground: 207 100% 10%;
+  --muted: 207 30% 20%;
+  --muted-foreground: 215 20% 65%;
+  --border: 207 30% 25%;
+  --input: 207 30% 25%;
+  --ring: 323 80% 60%;
+}
+
 html {
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Inter", sans-serif;
+  /* Smoothly transition background and colors when toggling */
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 body {
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-  -webkit-font-smoothing: antialiased;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
 }
 
-/* ======================================================
-   AZ THEME — LIGHT
-   ====================================================== */
-:root {
-  --background: 0 0% 100%;
-  --foreground: 215 30% 15%;
-
-  --card: 0 0% 100%;
-  --card-foreground: 215 30% 15%;
-
-  --primary: 332 100% 26%;
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 201 74% 64%;
-  --secondary-foreground: 215 30% 15%;
-
-  --accent: 67 65% 55%;
-  --accent-foreground: 215 30% 15%;
-
-  --muted: 210 20% 96%;
-  --muted-foreground: 215 15% 40%;
-  --border: 215 15% 85%;
-  --input: 215 15% 85%;
-
-  --success: 67 65% 55%;
-  --danger: 332 100% 41%;
-  --destructive: 332 100% 41%;
-  --destructive-foreground: 0 0% 100%;
-
-  --az-navy: 215 30% 15%;
-  --az-lime: 67 65% 55%;
-  --az-gold: 45 65% 55%;
-
-  --radius: 0.75rem;
-  --ring: 332 100% 26%;
-  --ring-offset: 0 0% 100%;
-}
-
-/* ======================================================
-   DARK MODE
-   ====================================================== */
-.dark {
-  --background: 215 30% 8%;
-  --foreground: 0 0% 98%;
-
-  --card: 215 30% 12%;
-  --card-foreground: 0 0% 98%;
-
-  --primary: 332 100% 45%;
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 201 74% 55%;
-  --secondary-foreground: 215 30% 10%;
-
-  --accent: 67 65% 55%;
-  --accent-foreground: 215 30% 10%;
-
-  --muted: 215 25% 18%;
-  --muted-foreground: 215 15% 65%;
-  --border: 215 20% 22%;
-  --input: 215 20% 22%;
-
-  --success: 67 65% 55%;
-  --danger: 332 100% 55%;
-  --destructive: 332 100% 55%;
-  --destructive-foreground: 0 0% 100%;
-
-  --az-navy: 215 30% 85%;
-  --az-lime: 67 65% 55%;
-  --az-gold: 45 65% 55%;
-
-  --ring: 332 100% 45%;
-  --ring-offset: 215 30% 8%;
-}
-
-/* ======================================================
-   COMPONENT HELPERS (NO @apply)
-   ====================================================== */
 .kpi-card {
-  background-color: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.kpi-card:hover {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-.dark .kpi-card {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-}
-
-.dark .kpi-card:hover {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
-    0 2px 4px -1px rgba(0, 0, 0, 0.2);
-}
-
-.section-title {
-  font-size: 0.75rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: hsl(var(--muted-foreground));
-}
-
-.text-positive {
-  color: hsl(var(--success));
-}
-
-.text-negative {
-  color: hsl(var(--danger));
-}
-
-.chart-card {
-  background-color: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-}
-
-.dark .chart-card {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  @apply bg-card text-card-foreground border-border rounded-lg border p-6 shadow-sm transition-colors duration-500;
 }
