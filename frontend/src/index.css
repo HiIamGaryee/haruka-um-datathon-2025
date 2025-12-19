@@ -1,3 +1,4 @@
+@import "tailwindcss";
 @import url("https://rsms.me/inter/inter.css");
 
 @tailwind base;
@@ -106,7 +107,8 @@ body {
 }
 
 .kpi-card:hover {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .dark .kpi-card {
@@ -114,7 +116,8 @@ body {
 }
 
 .dark .kpi-card:hover {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 2px 4px -1px rgba(0, 0, 0, 0.2);
 }
 
 .section-title {
