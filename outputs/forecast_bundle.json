@@ -1,0 +1,82 @@
+{
+  "starting_cash_usd": 9654990.290248064,
+  "history_weeks": 1,
+  "model": "Rolling Mean Baseline",
+  "baseline_window_weeks": 1,
+  "mae": "insufficient_history",
+  "weekly_actuals": [
+    {
+      "week_start": "2025-10-27T00:00:00",
+      "net_cash_flow": -67878.0,
+      "cash_position": 9587112.290248064
+    }
+  ],
+  "forecasts": {
+    "1_month": [
+      {
+        "week_index": 1,
+        "forecast_week_start": "2025-11-03T00:00:00",
+        "forecast_net_cash_flow": -67878.0
+      }
+    ],
+    "3_months": [
+      {
+        "week_index": 1,
+        "forecast_week_start": "2025-11-03T00:00:00",
+        "forecast_net_cash_flow": -67878.0
+      },
+      {
+        "week_index": 2,
+        "forecast_week_start": "2025-11-10T00:00:00",
+        "forecast_net_cash_flow": -67878.0
+      },
+      {
+        "week_index": 3,
+        "forecast_week_start": "2025-11-17T00:00:00",
+        "forecast_net_cash_flow": -67878.0
+      }
+    ],
+    "1_year": [
+      {
+        "week_index": 1,
+        "forecast_week_start": "2025-11-03T00:00:00",
+        "forecast_net_cash_flow": -67878.0
+      },
+      {
+        "week_index": 2,
+        "forecast_week_start": "2025-11-10T00:00:00",
+        "forecast_net_cash_flow": -67878.0
+      },
+      {
+        "week_index": 3,
+        "forecast_week_start": "2025-11-17T00:00:00",
+        "forecast_net_cash_flow": -67878.0
+      },
+      {
+        "week_index": 4,
+        "forecast_week_start": "2025-11-24T00:00:00",
+        "forecast_net_cash_flow": -67878.0
+      },
+      {
+        "week_index": 5,
+        "forecast_week_start": "2025-12-01T00:00:00",
+        "forecast_net_cash_flow": -67878.0
+      },
+      {
+        "week_index": 6,
+        "forecast_week_start": "2025-12-08T00:00:00",
+        "forecast_net_cash_flow": -67878.0
+      }
+    ]
+  },
+  "assumptions": [
+    "Transaction values unavailable; directional proxy applied",
+    "Recent historical behavior used as near-term signal",
+    "Forecast reflects liquidity direction, not magnitude"
+  ],
+  "limitations": [
+    "Short history limits statistical confidence",
+    "No seasonality or shock modeling applied",
+    "Indicative planning tool, not predictive guarantee"
+  ]
+}

@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 from sklearn.metrics import mean_absolute_error
+import json
 
 # ======================================================
 # PATHS
@@ -12,25 +13,26 @@ OUT = ROOT / "outputs"
 OUT.mkdir(exist_ok=True)
 
 # ======================================================
-# 1. LOAD CASH BALANCE (STARTING LIQUIDITY)
+# 1. LOAD CASH BALANCE
 # ======================================================
 balance_df = pd.read_excel(DATA_FILE, sheet_name="Data - Cash Balance")
 balance_df.columns = balance_df.columns.str.strip().str.lower()
 
-starting_cash = balance_df["carryforward balance (usd)"].sum()
+starting_cash = float(balance_df["carryforward balance (usd)"].sum())
 
 # ======================================================
-# 2. LOAD TRANSACTIONS (DIRECTIONAL FLOWS)
+# 2. LOAD TRANSACTIONS
 # ======================================================
 tx = pd.read_excel(DATA_FILE, sheet_name="Data - Main")
 tx.columns = tx.columns.str.strip().str.lower()
 
 tx["file month"] = pd.to_datetime(tx["file month"], errors="coerce")
+tx = tx.dropna(subset=["file month"])
 
 tx["direction"] = np.where(
     tx["name of offsetting account"]
-    .astype(str)
-    .str.contains("house bank", case=False, na=False),
+        .astype(str)
+        .str.contains("house bank", case=False, na=False),
     -1,
     1,
 )
@@ -46,6 +48,7 @@ weekly = (
     tx.groupby("week_start")["amount"]
     .sum()
     .reset_index()
+    .sort_values("week_start")
 )
 
 weekly["net_cash_flow"] = weekly["amount"]
@@ -54,51 +57,84 @@ weekly["cash_position"] = starting_cash + weekly["net_cash_flow"].cumsum()
 weekly.to_csv(OUT / "weekly_actuals.csv", index=False)
 
 # ======================================================
-# 4. BASELINE FORECAST (ROLLING MEAN)
+# 4. FORECAST HORIZONS (DATA-DRIVEN)
 # ======================================================
-series = weekly["net_cash_flow"].astype(float).values
+series = weekly["net_cash_flow"].astype(float)
+history_weeks = len(series)
 
-window = min(4, len(series))
-rolling_mean = float(np.mean(series[-window:]))
-
-forecast_1m = [rolling_mean] * 4
-forecast_6m = [rolling_mean] * 26
-
-pd.DataFrame({
-    "week": range(1, 5),
-    "forecast_net_cash_flow": forecast_1m
-}).to_csv(OUT / "forecast_1m.csv", index=False)
-
-pd.DataFrame({
-    "week": range(1, 27),
-    "forecast_net_cash_flow": forecast_6m
-}).to_csv(OUT / "forecast_6m.csv", index=False)
+horizons = {
+    "1_month": min(4, history_weeks),
+    "3_months": min(12, history_weeks * 3),
+    "1_year": min(52, history_weeks * 6),
+}
 
 # ======================================================
-# 5. EVALUATION (SAFE FOR SHORT SERIES)
+# 5. BASELINE MODEL (ROLLING MEAN)
 # ======================================================
-if len(series) >= 2:
-    actual = series[-window:]
-    pred = np.array(forecast_1m[:len(actual)])
-    mae = mean_absolute_error(actual, pred)
+window = min(4, history_weeks)
+baseline = float(series.tail(window).mean())
+
+last_week = weekly["week_start"].max()
+
+forecasts = {}
+for name, weeks in horizons.items():
+    forecasts[name] = [
+        {
+            "week_index": i + 1,
+            "forecast_week_start": (
+                last_week + pd.Timedelta(weeks=i + 1)
+            ).isoformat(),
+            "forecast_net_cash_flow": baseline,
+        }
+        for i in range(weeks)
+    ]
+
+# ======================================================
+# 6. EVALUATION
+# ======================================================
+if history_weeks >= 2:
+    actual = series.tail(window).values
+    pred = np.array([baseline] * len(actual))
+    mae = float(mean_absolute_error(actual, pred))
 else:
-    mae = None
+    mae = "insufficient_history"
 
-metrics = {
-    "starting_cash_usd": float(starting_cash),
+# ======================================================
+# 7. SERIALIZE WEEKLY ACTUALS (FIXED)
+# ======================================================
+weekly_serialized = [
+    {
+        "week_start": row["week_start"].isoformat(),
+        "net_cash_flow": float(row["net_cash_flow"]),
+        "cash_position": float(row["cash_position"]),
+    }
+    for row in weekly.to_dict(orient="records")
+]
+
+# ======================================================
+# 8. FINAL OUTPUT
+# ======================================================
+output = {
+    "starting_cash_usd": starting_cash,
+    "history_weeks": history_weeks,
     "model": "Rolling Mean Baseline",
-    "mae": float(mae) if mae is not None else "insufficient_history",
+    "baseline_window_weeks": window,
+    "mae": mae,
+    "weekly_actuals": weekly_serialized,
+    "forecasts": forecasts,
     "assumptions": [
-        "Transaction amounts unavailable; directional proxy used",
-        "Recent weeks represent near-term liquidity behaviour",
-        "Forecast focuses on liquidity direction not magnitude"
+        "Transaction values unavailable; directional proxy applied",
+        "Recent historical behavior used as near-term signal",
+        "Forecast reflects liquidity direction, not magnitude"
     ],
     "limitations": [
-        "Short historical window limits backtesting",
-        "Forecast is indicative not predictive of shocks"
+        "Short history limits statistical confidence",
+        "No seasonality or shock modeling applied",
+        "Indicative planning tool, not predictive guarantee"
     ]
 }
 
-pd.Series(metrics).to_json(OUT / "metrics.json", indent=2)
+with open(OUT / "forecast_bundle.json", "w") as f:
+    json.dump(output, f, indent=2)
 
 print("Forecast pipeline completed successfully.")
