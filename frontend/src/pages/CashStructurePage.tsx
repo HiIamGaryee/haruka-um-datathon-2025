@@ -121,10 +121,7 @@ export default function CashStructurePage() {
 
   return (
     <DashboardLayout>
-      <div
-        id="page-cash-structure"
-        className="space-y-10 p-8 max-w-7xl mx-auto"
-      >
+      <div id="page-cash-structure" className="space-y-10  max-w-7xl mx-auto">
         {/* HEADER */}
         <div className="flex justify-between items-end border-b border-border pb-6">
           <div>

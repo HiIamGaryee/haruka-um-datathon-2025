@@ -99,7 +99,7 @@ export default function ForecastPage() {
     <DashboardLayout>
       <div
         id="page-forecast"
-        className="space-y-8 p-8 max-w-7xl mx-auto animate-in fade-in duration-500"
+        className="space-y-8 max-w-7xl mx-auto animate-in fade-in duration-500"
       >
         {/* HEADER */}
         <div className="flex justify-between items-end border-b border-border pb-6">

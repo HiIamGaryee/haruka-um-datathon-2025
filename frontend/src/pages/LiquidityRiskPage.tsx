@@ -124,7 +124,7 @@ export default function LiquidityRiskPage() {
 
   return (
     <DashboardLayout>
-      <div id="page-liquidity-risk" className="space-y-8 p-8 max-w-7xl mx-auto">
+      <div id="page-liquidity-risk" className="space-y-8 max-w-7xl mx-auto">
         {/* HEADER */}
         <div className="flex justify-between items-end border-b border-border pb-6">
           <div>
