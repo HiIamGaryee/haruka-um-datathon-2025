@@ -1,73 +1,127 @@
-# React + TypeScript + Vite
+# Haruka UM Cash Flow Dashboard - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React-based dashboard for visualizing cash flow forecasts, liquidity analysis, and financial insights.
 
-Currently, two official plugins are available:
+## 🚀 Quick Start
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Prerequisites
 
-## React Compiler
+- Node.js 18+ and npm installed
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Installation
 
-## Expanding the ESLint configuration
+```bash
+# Install dependencies
+npm install
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Start development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The application will be available at `http://localhost:5173`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📦 Available Scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- `npm run dev` - Start development server with hot module replacement
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build locally
+- `npm run lint` - Run ESLint
+
+## 🏗️ Project Structure
+
 ```
+frontend/
+├── src/
+│   ├── components/          # Reusable UI components
+│   │   ├── ui/              # shadcn/ui components
+│   │   ├── Header.tsx       # Top navigation header
+│   │   ├── Sidebar.tsx      # Left sidebar navigation
+│   │   └── ThemeToggle.tsx  # Dark/light mode toggle
+│   ├── pages/               # Page components
+│   │   ├── DashboardPage.tsx
+│   │   ├── ForecastPage.tsx
+│   │   └── ReportPage.tsx
+│   ├── layout/              # Layout components
+│   │   └── DashboardLayout.tsx
+│   ├── data/                # Data files (CSV, JSON)
+│   ├── lib/                 # Utility functions
+│   │   └── utils.ts         # Helper functions (cn, etc.)
+│   ├── App.tsx              # Main app component
+│   ├── main.tsx             # Entry point
+│   └── index.css            # Global styles & theme
+├── public/                  # Static assets
+└── package.json            # Dependencies
+```
+
+## 🎨 UI Components
+
+This project uses [shadcn/ui](https://ui.shadcn.com/) components built on top of:
+
+- **Tailwind CSS** - Utility-first CSS framework
+- **Radix UI** - Accessible component primitives
+- **Lucide React** - Icon library
+
+### Available UI Components
+
+- `Button` - Various button variants
+- `Card` - Container component
+- `Separator` - Visual divider
+
+## 🎯 Features
+
+- **Dashboard Overview** - Key metrics and cash flow visualization
+- **Forecast Analysis** - 1-month, 3-month, and 12-month forecasts
+- **Executive Reports** - PDF-ready financial summaries
+- **Dark/Light Mode** - Theme toggle support
+- **Responsive Design** - Works on desktop and mobile
+
+## 📊 Data Requirements
+
+The frontend expects data files in `src/data/`:
+
+- `weekly_actuals.csv` - Historical weekly cash flow data
+- `forecast_1m.csv` - 1-month forecast
+- `forecast_6m.csv` - 6-month forecast
+- `metrics.json` - Model metrics and metadata
+
+These files are generated by the Python forecast pipeline.
+
+## 🔧 Development
+
+### Adding New Components
+
+1. Create component in `src/components/`
+2. Use shadcn/ui components from `src/components/ui/`
+3. Follow existing patterns for styling with Tailwind CSS
+
+### Styling
+
+- Global styles: `src/index.css`
+- Theme variables: CSS custom properties in `:root` and `.dark`
+- Component styles: Tailwind utility classes
+
+### TypeScript
+
+This project uses TypeScript for type safety. All components should be properly typed.
+
+## 🚢 Building for Production
+
+```bash
+npm run build
+```
+
+The production build will be in the `dist/` directory.
+
+## 📝 Notes
+
+- The dashboard uses React Router for navigation
+- Data is loaded from CSV files using PapaParse
+- Charts are rendered using Recharts
+- PDF export functionality uses jsPDF and html2canvas
+
+## 🔗 Related Documentation
+
+- [React Documentation](https://react.dev/)
+- [Vite Documentation](https://vitejs.dev/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/)
+- [shadcn/ui Documentation](https://ui.shadcn.com/)

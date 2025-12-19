@@ -1,5 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard, BarChart3, FileText } from "lucide-react";
+import {
+  LayoutDashboard,
+  BarChart3,
+  FileText,
+  ShieldAlert,
+  Layers,
+} from "lucide-react";
 import { cn } from "../lib/utils"; // Assuming you have a standard utils file, if not, remove 'cn' and use string templates
 
 // Simple utility if you don't have cn
@@ -7,9 +13,11 @@ const cx = (...classes: (string | undefined | boolean)[]) =>
   classes.filter(Boolean).join(" ");
 
 const NAV_ITEMS = [
-  { label: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
-  { label: "Forecast", icon: BarChart3, path: "/forecast" },
-  { label: "Reports", icon: FileText, path: "/report" },
+  { label: "Overview", icon: LayoutDashboard, path: "/dashboard" },
+  { label: "Cash Forecast", icon: BarChart3, path: "/forecast" },
+  { label: "Liquidity Risk", icon: ShieldAlert, path: "/liquidity-risk" },
+  { label: "Cash Structure", icon: Layers, path: "/cash-structure" },
+  { label: "Executive Report", icon: FileText, path: "/report" },
 ];
 
 export default function Sidebar() {

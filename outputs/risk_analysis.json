@@ -1,0 +1,23 @@
+{
+  "starting_cash_usd": 9654990.290248064,
+  "cash_stability_index": [
+    {
+      "week_start": "2025-10-27T00:00:00",
+      "stability_index": null,
+      "risk_band": "unknown",
+      "liquidity_ratio": 0.9929696459592964,
+      "drawdown": 0.0
+    }
+  ],
+  "assumptions": [
+    "Directional cash proxy used",
+    "Volatility via rolling standard deviation",
+    "Stress from consecutive negative weeks",
+    "Indices normalized for comparison"
+  ],
+  "limitations": [
+    "Does not capture magnitude of cash flows",
+    "Short history reduces statistical confidence",
+    "Indicative risk, not predictive stress testing"
+  ]
+}

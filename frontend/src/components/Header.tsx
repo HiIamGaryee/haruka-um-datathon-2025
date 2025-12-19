@@ -1,17 +1,25 @@
-import { NavLink, useLocation } from "react-router-dom"
-import ThemeToggle from "./ThemeToggle"
-import { LayoutDashboard, BarChart3, FileText } from "lucide-react"
-import { cn } from "../lib/utils"
-import { Separator } from "./ui/separator"
+import { NavLink, useLocation } from "react-router-dom";
+import ThemeToggle from "./ThemeToggle";
+import {
+  LayoutDashboard,
+  BarChart3,
+  FileText,
+  ShieldAlert,
+  Layers,
+} from "lucide-react";
+import { cn } from "../lib/utils";
+import { Separator } from "./ui/separator";
 
 const navItems = [
-  { label: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
-  { label: "Forecast", icon: BarChart3, path: "/forecast" },
-  { label: "Report", icon: FileText, path: "/report" },
-]
+  { label: "Overview", icon: LayoutDashboard, path: "/dashboard" },
+  { label: "Cash Forecast", icon: BarChart3, path: "/forecast" },
+  { label: "Liquidity Risk", icon: ShieldAlert, path: "/liquidity-risk" },
+  { label: "Cash Structure", icon: Layers, path: "/cash-structure" },
+  { label: "Executive Report", icon: FileText, path: "/report" },
+];
 
 export default function Header() {
-  const location = useLocation()
+  const location = useLocation();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
@@ -32,7 +40,7 @@ export default function Header() {
 
       <nav className="container flex items-center gap-1 px-6">
         {navItems.map(({ label, icon: Icon, path }) => {
-          const isActive = location.pathname === path
+          const isActive = location.pathname === path;
           return (
             <NavLink
               key={path}
@@ -48,9 +56,9 @@ export default function Header() {
               <Icon className="h-4 w-4" />
               {label}
             </NavLink>
-          )
+          );
         })}
       </nav>
     </header>
-  )
+  );
 }
