@@ -161,9 +161,37 @@ See: step.txt (in project root)
 
 Quick Start:
 
-1. Run Python forecast pipeline: python/python/forecast_pipeline.py
-2. Start frontend: cd frontend && npm install && npm run dev
-3. Open browser: http://localhost:5173
+1. Run Python forecast pipeline
+
+```bash
+   cd python
+   source venv/bin/activate
+   python forecast_pipeline.py
+```
+
+2. Run Python Liquidity Risk Analysis
+
+````bash
+   cd python
+   source venv/bin/activate
+   python risk_analysis_pipeline.py
+```
+
+3. Move the data
+
+```bash
+cd python
+cp ../outputs/*.csv ../frontend/src/data/
+cp ../outputs/*.json ../frontend/src/data/
+````
+
+4. Start frontend:
+
+```bash
+ cd frontend && npm install && npm run dev
+```
+
+5. Open browser: http://localhost:5173
 
 ================================================================================
 PROJECT STRUCTURE
