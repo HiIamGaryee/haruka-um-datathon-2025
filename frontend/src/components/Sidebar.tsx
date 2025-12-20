@@ -7,6 +7,7 @@ import {
   Layers,
 } from "lucide-react";
 import { cn } from "../lib/utils"; // Assuming you have a standard utils file, if not, remove 'cn' and use string templates
+import logo from "@/assets/logo.png";
 
 // Simple utility if you don't have cn
 const cx = (...classes: (string | undefined | boolean)[]) =>
@@ -25,17 +26,15 @@ export default function Sidebar() {
     <aside className="flex h-screen w-64 flex-col border-r border-border bg-card">
       {/* BRAND HEADER */}
       <div className="px-6 py-8">
-        <div className="flex items-center gap-4">
-          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary shadow-md">
-            {/* White Text on Mulberry Background */}
-            <span className="text-2xl font-bold text-white">H</span>
-          </div>
+        <div className="flex items-center flex-col">
+          <img src={logo} alt="Logo" className="h-20 w-20 object-contain" />
+
           <div className="flex flex-col">
             <div className="text-xl font-bold text-secondary leading-tight">
               Haruka UM
             </div>
-            <div className="text-xs text-muted-foreground mt-1 font-medium">
-              AZ Theme v1.0
+            <div className="text-xs text-center text-muted-foreground mt-1 font-medium">
+              v1.0
             </div>
           </div>
         </div>
